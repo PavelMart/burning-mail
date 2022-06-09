@@ -1,0 +1,129 @@
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper.closed {
+    display: none;
+}
+
+.popup {
+    border-radius: 10px;
+    background-color: #212121;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.divider {
+    display: block;
+    align-self: stretch;
+    height: 2px;
+    background-image: linear-gradient(90deg, #ff3030 0.01%, #ff8d29 100%);
+}
+
+.header,
+.body {
+    padding: 10px;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    position: relative;
+}
+
+.exit {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 10px;
+    right: 10px;
+    border-radius: 0;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 0;
+        width: 25px;
+        height: 2px;
+        background-color: rgba(255, 255, 255, 0.5);
+        transform: rotate(45deg);
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 0;
+        width: 25px;
+        height: 2px;
+        background-color: rgba(255, 255, 255, 0.5);
+        transform: rotate(-45deg);
+    }
+}
+
+.exit:hover::after,
+.exit:hover::before {
+    box-shadow: 0 0 5px white;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align-last: left;
+    * {
+        align-self: stretch;
+    }
+    .label,
+    .input {
+        font-family: "Mulish";
+        font-style: normal;
+        font-size: 16px;
+        line-height: 125%;
+    }
+    .label {
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 10px;
+    }
+    .input {
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.2);
+        background-color: transparent;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 20px;
+    }
+    .popupText {
+        margin: 15px 0;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 125%;
+        color: rgba(255, 255, 255, 0.5);
+        a {
+            display: inline-block;
+            text-decoration-line: underline;
+            color: #ff8d29;
+            margin: 0 5px;
+            &:hover {
+                color: #eeb07a;
+            }
+        }
+    }
+    .button {
+        height: 45px;
+    }
+}

@@ -1,0 +1,107 @@
+.settings {
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    height: 100%;
+}
+.body {
+    display: flex;
+    max-height: 100%;
+}
+.settingsSection {
+    padding: 40px 0 0;
+    width: 50%;
+    h3 {
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 40px;
+    }
+    h4 {
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.5);
+    }
+    &:first-child {
+        border-right: 2px solid rgba(255, 255, 255, 0.2);
+        padding-right: 10px;
+    }
+    &:last-child {
+        padding-left: 10px;
+    }
+}
+.orderHystory {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px;
+
+    .orderList {
+        height: 100%;
+
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.6);
+
+            border-radius: 3px;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .orderTable {
+            width: 100%;
+            text-align: center;
+        }
+        .orderItem {
+            td {
+                padding: 10px 0;
+                font-size: 16px;
+                line-height: 125%;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 0.5);
+            }
+            td.bold {
+                font-weight: 700;
+                color: white;
+            }
+        }
+    }
+}
+
+.firstCol {
+    max-width: 425px;
+    width: 100%;
+    margin-right: 50px;
+    .buttonWrapper {
+        width: 100%;
+        align-self: stretch;
+    }
+    button {
+        width: 100%;
+        color: white;
+        height: 3em;
+    }
+}
+.secondCol {
+    .changeButton {
+        margin-bottom: 40px;
+        background-image: url("./../../../assets/img/App/fi-rr-pencil.svg");
+        background-repeat: no-repeat;
+        background-position: center left 5px;
+        background-size: contain;
+        padding-left: 35px;
+        &:hover {
+            background-image: url("./../../../assets/img/App/fi-rr-white-pencil.svg");
+        }
+    }
+}
+
+.emptyList {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        height: 100%;
+        width: auto;
+    }
+}

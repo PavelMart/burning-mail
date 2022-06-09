@@ -1,0 +1,21 @@
+@import "./../../../assets/style/varialable.scss";
+
+.body {
+    padding: 0 120px;
+    p {
+        max-width: 400px;
+    }
+    .item {
+        width: 100%;
+        &:not(:last-child) {
+            margin-bottom: 150px;
+        }
+    }
+    .divider {
+        margin: 25px 0 20px;
+        display: block;
+        width: 64px;
+        height: 2px;
+        background-image: linear-gradient(180deg, #ff3030 0.01%, #ff8d29 100%);
+    }
+}

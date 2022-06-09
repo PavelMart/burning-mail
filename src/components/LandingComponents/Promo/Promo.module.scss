@@ -1,0 +1,22 @@
+@import "./../../../assets/style/varialable.scss";
+
+section.promo {
+    padding-bottom: 150px;
+}
+
+.promo {
+    background-image: url("./../../../assets/img/Promo-bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .body {
+        width: 692px;
+        .button {
+            width: 335px;
+            height: 48px;
+            * {
+                text-transform: uppercase;
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+@import "./../../../assets/style/varialable.scss";
+.list {
+    row-gap: 50px;
+}
+.itemWrap {
+    margin: 0 -10px;
+    padding: 0 10px;
+}
+.item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 45px 60px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-image: linear-gradient(180deg, #212121 0%, rgba(255, 255, 255, 0.05) 100%);
+    img {
+        margin-bottom: 50px;
+    }
+}

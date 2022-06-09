@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap");
+
+$header_height: 190px;
+
+$font_mulish: "Mulish";
+
+$orange_gradient: linear-gradient(180deg, #ff3030 0.01%, #ff8d29 100%);
+$orange: #ff8d29;
+$white: #fff;
+$rgba_black_5: rgba(255, 255, 255, 0.05);
+$rgba_black_20: rgba(255, 255, 255, 0.2);
+$rgba_black_50: rgba(255, 255, 255, 0.5);
+
+$h1_text: normal 800 48px/125% $font_mulish;
+$h2_text: normal 600 36px/125% $font_mulish;
+$h3_text: normal 800 24px/125% $font_mulish;
+$h4_text: normal 800 20px/125% $font_mulish;
+
+$p_text_large: normal 700 20px/125% $font_mulish;
+$p_text_medium: normal 600 20px/180% $font_mulish;
+$p_text_small: normal 400 16px/150% $font_mulish;
+
+$extra_bold_text: normal 800 3em/125% $font_mulish;
+$bold_text: normal 700 1.25em/125% $font_mulish;
+$regular_text: normal 400 1.25em/125% $font_mulish;
+
+%orange_gradient_text {
+    background: $orange_gradient;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

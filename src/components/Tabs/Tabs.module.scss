@@ -1,0 +1,34 @@
+@import "./../../assets/style/varialable.scss";
+
+.tabs {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.item {
+    font: $p_text_medium;
+    cursor: pointer;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    top: 1px;
+    padding: 10px 55px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid transparent;
+    margin: 0;
+    transition-property: color, border;
+    transition-duration: 0.5s;
+}
+.item:hover {
+    color: #ff8d29;
+}
+
+.selected {
+    color: #ff8d29;
+    border-color: rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid #212121;
+}

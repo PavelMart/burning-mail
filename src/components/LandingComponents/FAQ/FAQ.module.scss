@@ -1,0 +1,16 @@
+@import "./../../../assets/style/varialable.scss";
+
+.faq {
+    .item {
+        h3 {
+            margin-bottom: 30px;
+        }
+        &:not(:last-child) {
+            margin-bottom: 50px;
+        }
+    }
+    img {
+        width: 100%;
+        height: auto;
+    }
+}

@@ -1,0 +1,42 @@
+@import "./../../../assets/style/varialable.scss";
+
+.menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.item {
+    cursor: pointer;
+    color: #fff;
+    transition-property: color;
+    transition-duration: 0.2s;
+    &:not(:last-child) {
+        margin-right: 1.5em;
+    }
+    a {
+        color: inherit;
+    }
+}
+.item:hover {
+    color: #ff8d29;
+}
+
+.selected {
+    color: #ff8d29;
+}
+
+@media all and (max-width: 1240px) {
+    .item {
+        &:not(:last-child) {
+            margin-right: 1em;
+        }
+    }
+}
+
+@media all and (max-width: 1070px) {
+    .menu {
+        display: none;
+    }
+}
