@@ -1,10 +1,10 @@
 import React from "react";
+import EmptyList from "../../../EmptyList/EmptyList";
 import cls from "./../Settings.module.scss";
-import EmptyOrderList from "./EmptyOrderList";
 import OrdersItem from "./OrdersItem";
 
 const OrderList = ({ orders }) => {
-    if (!orders.length) return <EmptyOrderList />;
+    if (!orders.length) return <EmptyList title="No orders yet" />;
     return (
         <div className={cls.orderList}>
             <table className={cls.orderTable}>
