@@ -12,6 +12,7 @@ const initialState = {
         password: "",
         confirmPassword: "",
     },
+    errors: {},
 };
 
 const popupSlice = createSlice({
@@ -50,6 +51,9 @@ const popupSlice = createSlice({
         setSignUpConfirmPassword(state, action) {
             state.signUpData.confirmPassword = action.payload;
         },
+        setErrors(state, action) {
+            state.errors = action.payload;
+        },
     },
 });
 
@@ -63,5 +67,6 @@ export const {
     setSignUpConfirmPassword,
     setSignUpEmail,
     setSignUpPassword,
+    setErrors,
 } = popupSlice.actions;
 export default popupSlice.reducer;

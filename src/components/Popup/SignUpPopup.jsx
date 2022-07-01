@@ -4,18 +4,14 @@ import Popup from "./Popup";
 import PopupInput from "./PopupInput";
 import PopupText from "./PopupText";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/auth/authSlice";
-import { closeSignUp, setSignUpConfirmPassword, setSignUpEmail, setSignUpPassword } from "../../redux/popup/popupSlice";
+import { setSignUpConfirmPassword, setSignUpEmail, setSignUpPassword } from "../../redux/popup/popupSlice";
 import Button from "../Buttons/Button";
 import { BoldText } from "../TextComponents/TextComponents";
+import { signup } from "../../redux/auth/authActions";
 
 const SignUpPopup = () => {
-    const { isSignUpClosed, signUpData } = useSelector((state) => state.popup);
+    const { isSignUpClosed, signUpData, errors } = useSelector((state) => state.popup);
     const dispatch = useDispatch();
-
-    const onClosePopup = () => {
-        dispatch(closeSignUp());
-    };
 
     const onChangeEmail = (e) => {
         dispatch(setSignUpEmail(e.target.value));
@@ -27,20 +23,35 @@ const SignUpPopup = () => {
         dispatch(setSignUpConfirmPassword(e.target.value));
     };
 
-    const onSubmitForm = () => {
-        dispatch(login(signUpData));
+    const submitForm = () => {
+        dispatch(signup(signUpData));
     };
 
     return (
-        <Popup title="Sign-up" isClosed={isSignUpClosed} onClosePopup={onClosePopup} onSubmitForm={onSubmitForm}>
-            <PopupInput onChange={onChangeEmail} type="email" placeholder="Your E-mail" id="sign-up-email" label="E-mail" />
-            <PopupInput onChange={onChangePassword} type="password" placeholder="Your Password" id="sign-up-password" label="Password" />
+        <Popup title="Sign-up" submitForm={submitForm} closed={isSignUpClosed}>
+            <PopupInput
+                onChange={onChangeEmail}
+                type="email"
+                placeholder="Your E-mail"
+                id="sign-up-email"
+                label="E-mail"
+                error={errors.email}
+            />
+            <PopupInput
+                onChange={onChangePassword}
+                type="password"
+                placeholder="Your Password"
+                id="sign-up-password"
+                label="Password"
+                error={errors.password}
+            />
             <PopupInput
                 onChange={onConfirmPassword}
                 type="password"
                 placeholder="Your Password"
                 id="sign-up-confirm-password"
                 label="Password"
+                error={errors.confirmPassword}
             />
             <PopupText>
                 I have read and agreed with

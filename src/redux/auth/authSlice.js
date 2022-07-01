@@ -1,38 +1,45 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { signin, signup, logout } from "./authActions";
 
 const initialState = {
-    isAuth: true,
-    email: "",
-    password: "",
+    isLoading: false,
+    isAuth: false,
+    user: {},
+    error: "",
 };
 
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {
-        setIsAuth(state, action) {
-            state.isAuth = action.payload;
-        },
-        setEmail(state, action) {
-            state.email = action.payload;
-        },
-        setPassword(state, action) {
-            state.password = action.payload;
-        },
-        login(state, action) {
-            state.email = action.payload.email;
-            state.password = action.payload.password;
+    reducers: {},
+    extraReducers: {
+        [signup.fulfilled.type]: (state, action) => {
             state.isAuth = true;
+            state.error = "";
+            state.user = action.payload;
         },
-        logout(state) {
-            state.email = "";
-            state.password = "";
+        [signup.rejected.type]: (state, action) => {
+            state.error = action.payload;
+        },
+        [signin.fulfilled.type]: (state, action) => {
+            state.isAuth = true;
+            state.error = "";
+            state.user = action.payload;
+        },
+        [signin.rejected.type]: (state, action) => {
+            state.error = action.payload;
+        },
+        [logout.fulfilled.type]: (state, action) => {
             state.isAuth = false;
+            state.error = "";
+            state.user = {};
+        },
+        [logout.rejected.type]: (state, action) => {
+            state.isAuth = false;
+            state.error = action.payload;
+            state.user = {};
         },
     },
 });
-
-// Action creators are generated for each case reducer function
-export const { setIsAuth, setEmail, setPassword, logout, login } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -4,18 +4,14 @@ import Popup from "./Popup";
 import PopupInput from "./PopupInput";
 import PopupText from "./PopupText";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/auth/authSlice";
 import { closeSignIn, openSignUp, setSignInEmail, setSignInPassword } from "../../redux/popup/popupSlice";
 import Button from "../Buttons/Button";
 import { BoldText } from "../TextComponents/TextComponents";
+import { signin } from "../../redux/auth/authActions";
 
 const SignInPopup = () => {
-    const { isSignInClosed, signInData } = useSelector((state) => state.popup);
+    const { isSignInClosed, signInData, errors } = useSelector((state) => state.popup);
     const dispatch = useDispatch();
-
-    const onClosePopup = () => {
-        dispatch(closeSignIn());
-    };
 
     const onChangeEmail = (e) => {
         dispatch(setSignInEmail(e.target.value));
@@ -24,8 +20,8 @@ const SignInPopup = () => {
         dispatch(setSignInPassword(e.target.value));
     };
 
-    const onSubmitForm = () => {
-        dispatch(login(signInData));
+    const submitForm = () => {
+        dispatch(signin(signInData));
     };
 
     const onChangePopup = () => {
@@ -34,7 +30,7 @@ const SignInPopup = () => {
     };
 
     return (
-        <Popup title="Sign-in" isClosed={isSignInClosed} onClosePopup={onClosePopup} onSubmitForm={onSubmitForm}>
+        <Popup title="Sign-in" submitForm={submitForm} closed={isSignInClosed}>
             <PopupInput
                 onChange={onChangeEmail}
                 type="email"
@@ -42,6 +38,7 @@ const SignInPopup = () => {
                 id="sign-in-email"
                 label="E-mail"
                 value={signInData.email}
+                error={errors.email}
             />
             <PopupInput
                 onChange={onChangePassword}
@@ -50,6 +47,7 @@ const SignInPopup = () => {
                 id="sign-in-password"
                 label="Password"
                 value={signInData.password}
+                error={errors.password}
             />
             <Button type="gradient" className={cls.button}>
                 <BoldText>Sign-In</BoldText>

@@ -1,36 +1,79 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { CSSTransition } from "react-transition-group";
 import { setScreen } from "../../redux/menu/menuSlice";
+import { closeSignIn, closeSignUp, setErrors } from "../../redux/popup/popupSlice";
 import cls from "./Popup.module.scss";
 import PopupBody from "./PopupBody";
 import PopupHeader from "./PopupHeader";
 
-const Popup = ({ title, children, isClosed, onClosePopup, onSubmitForm }) => {
+const validate = ({ email, password, confirmPassword }) => {
+    const errors = {};
+
+    if (!email) {
+        errors.email = "Required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+        errors.email = "Invalid email address";
+    }
+
+    if (!password) {
+        errors.password = "Required";
+    } else if (password.length < 4) {
+        errors.password = "Too small!";
+    } else if (password.length > 12) {
+        errors.password = "Too big!";
+    }
+
+    if (confirmPassword) {
+        if (password !== confirmPassword) {
+            errors.confirmPassword = "Password isn't correct";
+        }
+    }
+
+    return errors;
+};
+
+const Popup = ({ title, children, submitForm, closed }) => {
+    const { signInData, signUpData } = useSelector((state) => state.popup);
+    const validateData = title === "Sign-up" ? signUpData : signInData;
+
     const dispatch = useDispatch();
 
-    const onClose = (e) => {
-        const target = e.target;
-        const closestPopup = target.closest(`.${cls.popup}`);
-        const closestExit = target.closest(`.${cls.exit}`);
-
-        if (!closestPopup || closestExit) onClosePopup();
+    const closePopup = () => {
+        switch (title) {
+            case "Sign-up":
+                dispatch(closeSignUp());
+                break;
+            case "Sign-in":
+                dispatch(closeSignIn());
+                break;
+            default:
+                break;
+        }
+        dispatch(setErrors({}));
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(setScreen("dashboard"));
-        onSubmitForm();
-        onClosePopup();
+        const validateResult = validate(validateData);
+
+        if (!validateResult.email && !validateResult.password && !validateResult.confirmPassword) {
+            dispatch(setScreen("dashboard"));
+            submitForm();
+            closePopup();
+        } else dispatch(setErrors(validateResult));
     };
 
     return (
-        <div className={`${cls.wrapper} ${isClosed && cls.closed}`} onClick={onClose}>
-            <div className={cls.popup}>
-                <PopupHeader title={title} onClose={onClose} />
-                <span className={cls.divider} />
-                <PopupBody onSubmit={onSubmit}>{children}</PopupBody>
+        <CSSTransition in={!closed} timeout={500} classNames="popup-animation" unmountOnExit={true} mountOnEnter={false}>
+            <div className={`${cls.wrapper}`} onClick={closePopup}>
+                <div className={cls.popup} onClick={(e) => e.stopPropagation()}>
+                    <PopupHeader title={title} close={closePopup} />
+                    <span className={cls.divider} />
+                    <PopupBody onSubmit={onSubmit}>{children}</PopupBody>
+                </div>
             </div>
-        </div>
+        </CSSTransition>
     );
 };
 

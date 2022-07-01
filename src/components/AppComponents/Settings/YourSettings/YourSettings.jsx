@@ -4,12 +4,14 @@ import SettingsInput from "../../../Inputs/SettingsInput";
 import Button from "../../../Buttons/Button";
 import { Col, Row } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, setEmail, setPassword } from "../../../../redux/auth/authSlice";
 import { H3, H4 } from "../../../TextComponents/HeaderTextComponents";
 import { BoldText } from "../../../TextComponents/TextComponents";
+import { logout } from "../../../../redux/auth/authActions";
 
 const YourSettings = () => {
-    const { email, password } = useSelector((state) => state.auth);
+    const {
+        user: { email, password },
+    } = useSelector((state) => state.auth);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
 
@@ -19,11 +21,11 @@ const YourSettings = () => {
     const [passwordChangeDisabled, setPasswordChangeDisabled] = useState(true);
 
     const onChangeEmail = (e) => {
-        dispatch(setEmail(e.target.value));
+        // dispatch(setEmail(e.target.value));
     };
 
     const onChangePassword = (e) => {
-        dispatch(setPassword(e.target.value));
+        // dispatch(setPassword(e.target.value));
     };
 
     const onClickChangeEmail = () => {

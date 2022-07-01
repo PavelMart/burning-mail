@@ -35,3 +35,36 @@
         }
     }
 }
+
+.popup-animation-enter {
+    opacity: 0;
+}
+.popup-animation-enter-active {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+.popup-animation-exit {
+    opacity: 1;
+}
+.popup-animation-exit-active {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+@keyframes open-popup {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes close-popup {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

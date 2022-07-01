@@ -3,11 +3,11 @@ import Button from "../Buttons/Button";
 import { H4 } from "../TextComponents/HeaderTextComponents";
 import cls from "./Popup.module.scss";
 
-const PopupHeader = ({ title, onClose }) => {
+const PopupHeader = ({ title, close }) => {
     return (
         <div className={cls.header}>
             <H4>{title}</H4>
-            <Button addClassName={cls.exit} onClick={onClose} />
+            <Button className={cls.exit} onClick={close} />
         </div>
     );
 };

@@ -3,7 +3,7 @@ import cls from "./Button.module.scss";
 import Menu from "./../Menu/AppMenu/Menu";
 import { useDispatch, useSelector } from "react-redux";
 import { setScreen } from "../../redux/menu/menuSlice";
-import { setIsAuth } from "../../redux/auth/authSlice";
+import { logout } from "../../redux/auth/authActions";
 
 const MenuButton = ({ className }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +42,7 @@ const MenuButton = ({ className }) => {
 
     const logOut = () => {
         setIsOpen(false);
-        dispatch(setIsAuth(false));
+        dispatch(logout(false));
     };
 
     return (
