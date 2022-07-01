@@ -23,7 +23,7 @@ export const signin = createAsyncThunk("user/signin", async ({ email, password }
 
 export const logout = createAsyncThunk("user/logout", async (_, thunkAPI) => {
     try {
-        const response = await $api.post("/users/logout");
+        const response = await $api.get("/users/logout");
         localStorage.removeItem("token");
         return response.data;
     } catch (error) {
