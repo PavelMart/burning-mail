@@ -1,20 +1,17 @@
 import { Row } from "antd";
 import React from "react";
+import { useSelector } from "react-redux";
 import EmptyList from "../../../EmptyList/EmptyList";
 import cls from "./../Dashboard.module.scss";
 import MessagesItem from "./MessagesItem";
 
-const MessagesList = ({ messages, onDeleteMessage, addressId }) => {
+const MessagesList = () => {
+    const { mails } = useSelector((state) => state.mail);
+
     return (
         <Row className={cls.messagesBody}>
             <ul className={cls.messagesList}>
-                {messages.length ? (
-                    messages.map((message) => (
-                        <MessagesItem message={message} key={message.id} onDeleteMessage={onDeleteMessage} addressId={addressId} />
-                    ))
-                ) : (
-                    <EmptyList title="No mail yet" />
-                )}
+                {mails.length ? mails.map((mail) => <MessagesItem message={mail} key={mail.id} />) : <EmptyList title="No mail yet" />}
             </ul>
         </Row>
     );

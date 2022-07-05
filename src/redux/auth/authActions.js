@@ -25,6 +25,17 @@ export const logout = createAsyncThunk("user/logout", async (_, thunkAPI) => {
     try {
         const response = await $api.get("/users/logout");
         localStorage.removeItem("token");
+        localStorage.removeItem("currentEmail");
+        return response.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+    }
+});
+
+export const checkAuth = createAsyncThunk("user/check", async (_, thunkAPI) => {
+    try {
+        const response = await $api.get("/users/refresh");
+        localStorage.setItem("token", response.data.accessToken);
         return response.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message);

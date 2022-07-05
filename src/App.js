@@ -1,13 +1,22 @@
-import React, { useRef } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.scss";
 import MyHeader from "./components/Header/Header";
+import Loader from "./components/Loader/Loader";
 import SignInPopup from "./components/Popup/SignInPopup";
 import SignUpPopup from "./components/Popup/SignUpPopup";
 import Router from "./components/Router/Router";
+import { checkAuth } from "./redux/auth/authActions";
 
 const App = () => {
-    const { isAuth } = useSelector((state) => state.auth);
+    const { isAuth, isLoading } = useSelector((state) => state.auth);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(checkAuth());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const refList = {
         promoRef: useRef(null),
@@ -21,7 +30,9 @@ const App = () => {
         contactsRef: useRef(null),
     };
 
-    return (
+    return isLoading ? (
+        <Loader />
+    ) : (
         <div className="App">
             <MyHeader type={isAuth ? "app" : "landing"} refList={refList} />
             <Router refList={refList} />

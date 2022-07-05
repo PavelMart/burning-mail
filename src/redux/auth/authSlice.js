@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signin, signup, logout } from "./authActions";
+import { signin, signup, logout, checkAuth } from "./authActions";
 
 const initialState = {
     isLoading: false,
@@ -13,20 +13,33 @@ export const authSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
+        [signup.pending.type]: (state) => {
+            state.isLoading = true;
+        },
+        [signin.pending.type]: (state) => {
+            state.isLoading = true;
+        },
+        [checkAuth.pending.type]: (state) => {
+            state.isLoading = true;
+        },
         [signup.fulfilled.type]: (state, action) => {
+            state.isLoading = false;
             state.isAuth = true;
             state.error = "";
             state.user = action.payload;
         },
         [signup.rejected.type]: (state, action) => {
+            state.isLoading = false;
             state.error = action.payload;
         },
         [signin.fulfilled.type]: (state, action) => {
+            state.isLoading = false;
             state.isAuth = true;
             state.error = "";
             state.user = action.payload;
         },
         [signin.rejected.type]: (state, action) => {
+            state.isLoading = false;
             state.error = action.payload;
         },
         [logout.fulfilled.type]: (state, action) => {
@@ -38,6 +51,16 @@ export const authSlice = createSlice({
             state.isAuth = false;
             state.error = action.payload;
             state.user = {};
+        },
+        [checkAuth.fulfilled.type]: (state, action) => {
+            state.isLoading = false;
+            state.isAuth = true;
+            state.error = "";
+            state.user = action.payload;
+        },
+        [checkAuth.rejected.type]: (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
         },
     },
 });

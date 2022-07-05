@@ -1,27 +1,27 @@
 import { Col } from "antd";
-import React from "react";
-import cls from "./../Dashboard.module.scss";
-import Middle from "./Middle";
-import Header from "./Header";
-import MessagesList from "./MessagesList";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteMessage } from "../../../../redux/mail/mailSlice";
+import { getMails } from "../../../../redux/mail/mailActions";
+import cls from "./../Dashboard.module.scss";
+import Header from "./Header";
+import Middle from "./Middle";
+import MessagesList from "./MessagesList";
 
 const Messages = () => {
-    const { addresses, current } = useSelector((state) => state.mail);
-    const { messages, address, id } = addresses.find((address) => address.id === current);
+    const { current } = useSelector((state) => state.boxes);
 
     const dispatch = useDispatch();
 
-    const onDeleteMessage = (id, messageId) => {
-        dispatch(deleteMessage(id, messageId));
-    };
+    useEffect(() => {
+        if (current) dispatch(getMails({ id: current.id }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [current]);
 
     return (
         <Col span={18} className={cls.messages}>
-            <Header address={address} id={id} count={addresses.length} />
-            <Middle messages={messages} />
-            <MessagesList messages={messages} onDeleteMessage={onDeleteMessage} addressId={id} />
+            <Header />
+            <Middle />
+            <MessagesList />
         </Col>
     );
 };

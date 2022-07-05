@@ -4,8 +4,11 @@ import cls from "./../Dashboard.module.scss";
 import Button from "../../../Buttons/Button";
 import { BoldText, RegularText } from "../../../TextComponents/TextComponents";
 import Switch from "./Switch";
+import { useSelector } from "react-redux";
 
-const Middle = ({ messages }) => {
+const Middle = () => {
+    const { mails } = useSelector((state) => state.mail);
+
     return (
         <Row className={[cls.row, cls.middle].join(" ")} justify="space-between" align="middle">
             <Col>
@@ -18,7 +21,7 @@ const Middle = ({ messages }) => {
             </Col>
             <Col>
                 <Switch id={1} count={1}>
-                    <RegularText className={cls.messagesCount}>{messages.length}</RegularText>
+                    <RegularText className={cls.messagesCount}>{mails.length}</RegularText>
                 </Switch>
             </Col>
         </Row>

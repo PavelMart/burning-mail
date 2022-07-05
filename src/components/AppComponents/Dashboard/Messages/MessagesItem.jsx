@@ -3,7 +3,7 @@ import Button from "../../../Buttons/Button";
 import { RegularText } from "../../../TextComponents/TextComponents";
 import cls from "./../Dashboard.module.scss";
 
-const MessagesItem = ({ message, onDeleteMessage, addressId }) => {
+const MessagesItem = ({ message }) => {
     const [selected, setSelected] = useState(false);
 
     const getContentText = (content) => {
@@ -21,7 +21,7 @@ const MessagesItem = ({ message, onDeleteMessage, addressId }) => {
             <div className={[cls.messageInfo, selected && cls.selected].join(" ")} onClick={openMessage}>
                 <div className={cls.from}>{message.from}</div>
                 <div className={cls.theme}>{message.theme}</div>
-                <div className={cls.shortText}>{getContentText(message.content)}</div>
+                <div className={cls.shortText}>{getContentText(message.html)}</div>
                 {selected ? (
                     <div className={cls.buttons}>
                         <Button type="gray" className={cls.forward}>
@@ -30,7 +30,7 @@ const MessagesItem = ({ message, onDeleteMessage, addressId }) => {
                         <Button type="gray" className={cls.reply}>
                             <RegularText>Reply</RegularText>
                         </Button>
-                        <Button type="gray" className={cls.delete} onClick={() => onDeleteMessage({ addressId, messageId: message.id })}>
+                        <Button type="gray" className={cls.delete}>
                             <RegularText>Delete</RegularText>
                         </Button>
                     </div>
@@ -41,7 +41,7 @@ const MessagesItem = ({ message, onDeleteMessage, addressId }) => {
                     </>
                 )}
             </div>
-            <div className={[cls.messageText, selected && cls.selected].join(" ")} dangerouslySetInnerHTML={{ __html: message.content }} />
+            <div className={[cls.messageText, selected && cls.selected].join(" ")} dangerouslySetInnerHTML={{ __html: message.html }} />
         </div>
     );
 };
